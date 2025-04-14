@@ -123,7 +123,7 @@ then
   echo "$user:$(jq -r '.credentials.password' $config)" | chpasswd --root /mnt
   arch-chroot /mnt bash -c "echo '%wheel ALL=(ALL:ALL) ALL' | sudo EDITOR='tee -a' visudo"
 fi
-
+arch-chroot /mnt systemctl enable ssh
 arch-chroot /mnt systemctl enable NetworkManager 
 
 echo "Setting up bootloader"
