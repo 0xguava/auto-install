@@ -34,7 +34,7 @@ jobs:
         run: |
           # necessary files for xorriso
           mkdir -p customiso/{boot/grub, root, etc/systemd/system/getty@tty1.service.d}
-          cp /boot/vmlinux-linux customiso/boot/vmlinuz
+          cp /boot/vmlinuz-linux customiso/boot/vmlinuz
           cp /boot/initramfs-linux.img customiso/initrd.img
           
           # copying arch.sh to customiso root directory
