@@ -30,8 +30,29 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         
-      - run: bash arch.sh
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: Custom Arch Live ISO
-          path: /tmp/archlive/out/*.iso
+      - name: Preparing a skeleton of ISO structure
+        run: |
+          # necessary files for xorriso
+          mkdir -p customiso/{boot/grub, root, etc/systemd/system/getty@tty1.service.d}
+          cp /boot/vmlinux-linux customiso/boot/vmlinuz
+          cp /boot/initramfs-linux.img customiso/initrd.img
+          
+          # copying arch.sh to customiso root directory
+          cp arch.sh customiso/root/arch.sh
+          cp config.json customiso/root/config.json
+          chmod +x customiso/root/arch.sh
+
+          # minimal GRUB for initial boot
+          cat > customiso/boot/grub/grub.cfg <<EOF
+          set default = 0
+          set timeout = 3
+          menuentry "Custom Arch auto-install" {
+            linux /boot/vmlinuz
+            initrd /boot/initrd.img
+          }
+          EOF
+
+          # Auto login to TTY1 as root
+          cat > customiso/etc/systemd/getty@tty1.service.d/override.conf << EOF
+
+
