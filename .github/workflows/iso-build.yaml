@@ -34,12 +34,12 @@ jobs:
         run: |
           # necessary files for xorriso
           mkdir -p customiso/{boot/grub,root,etc/systemd/system/getty@tty1.service.d}
-          cp -r /boot/vmlinuz-linux customiso/boot/vmlinuz-linux
-          cp -r /boot/initramfs-linux.img customiso/initrd.img
+          cp /boot/vmlinuz-linux customiso/boot/vmlinuz
+          cp /boot/initramfs-linux.img customiso/initrd.img
           
           # copying arch.sh to customiso root directory
           cp arch.sh customiso/root/arch.sh
-          cp config.json customiso/root/config.json
+          cp config.json customiso/root/config.json || true
           chmod +x customiso/root/arch.sh
 
           # minimal GRUB for initial boot
@@ -56,7 +56,7 @@ jobs:
           cat > customiso/etc/systemd/getty@tty1.service.d/override.conf << EOF
           [Service]
           ExecStart=
-          ExecStart=~/usr/bin/agetty --autologin root --noclear %I \$TERM
+          ExecStart=-/usr/bin/agetty --autologin root --noclear %I \$TERM
           EOF
 
           # Auto-run arch.sh on login
