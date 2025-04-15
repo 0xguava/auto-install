@@ -29,10 +29,6 @@ else
   efi_part=${disk}1
   root_part=${disk}2
 fi
-
-
-# read -p "Select bootloader [1/2]: " yn2
-
 # read -p "EFI partition: " efi_part
 echo "Formatting efi partition to fat32"
 mkfs.fat -F 32 $efi_part
