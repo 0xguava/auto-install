@@ -53,7 +53,7 @@ jobs:
           EOF
 
           # Auto login to TTY1 as root
-          cat > customiso/etc/systemd/getty@tty1.service.d/override.conf << EOF
+          cat > customiso/etc/systemd/system/getty@tty1.service.d/override.conf << EOF
           [Service]
           ExecStart=
           ExecStart=-/usr/bin/agetty --autologin root --noclear %I \$TERM
