@@ -31,7 +31,7 @@ jobs:
       - run: find .
       - run: cat /etc/os-release
       - run: pacman-key --init
-      - run: pacman --noconfirm -Sy archlinux-keyring git
+      - run: pacman --noconfirm -Sy archlinux-keyring git parted
       - run: git clone https://github.com/shivjeet1/auto-install.git
       - run: cd auto-install
       - run: bash arch.sh
