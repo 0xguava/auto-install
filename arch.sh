@@ -6,7 +6,7 @@ set -e
 # shopt -s nullglob
 config=$PWD/config.json
 
-# echo "NOTE: Partioning should be done before proceeding."
+
 # read -p "Proceed? [y/n]: " yn
 
 # if [ $yn != "y" ]
