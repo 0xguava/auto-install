@@ -4,6 +4,8 @@ name: Build Custom Arch ISO
 
 on:
   push:
+    paths:
+      - 'arch.sh'
     branches:
       - master
       - main # In case we adopt this convention in the future
@@ -15,25 +17,19 @@ on:
       - '**.md'
       - 'LICENSE'
       - 'PKGBUILD'
-  release:
-    types:
-      - created
 
 jobs:
   build:
-    runs-on: archlinux-latest
-    #container:
-      #image: archlinux/archlinux:latest
-      #options: --privileged
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-      - run: pwd
-      - run: find .
-      - run: cat /etc/os-release
-      - run: pacman-key --init
-      - run: pacman --noconfirm -Sy archlinux-keyring git parted
-      - run: git clone https://github.com/shivjeet1/auto-install.git
-      - run: cd auto-install
+      - name: Install required Packages in workflow 
+        run: pacman -Sy --noconfirm grub xorriso dosfstools mtools base base-devel
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        
       - run: bash arch.sh
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
