@@ -33,9 +33,9 @@ jobs:
       - name: Preparing a skeleton of ISO structure
         run: |
           # necessary files for xorriso
-          mkdir -p customiso/{boot/grub, root, etc/systemd/system/getty@tty1.service.d}
-          cp /boot/vmlinuz-linux customiso/boot/vmlinuz
-          cp /boot/initramfs-linux.img customiso/initrd.img
+          mkdir -p customiso/{boot/grub,root,etc/systemd/system/getty@tty1.service.d}
+          cp -r /boot/vmlinuz-linux customiso/boot/vmlinuz-linux
+          cp -r /boot/initramfs-linux.img customiso/initrd.img
           
           # copying arch.sh to customiso root directory
           cp arch.sh customiso/root/arch.sh
