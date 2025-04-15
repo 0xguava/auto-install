@@ -33,7 +33,6 @@ fi
 echo "Formatting efi partition to fat32"
 mkfs.fat -F 32 $efi_part
 
-# read -p "Is swap partition required [y/n]: " yn1
 # if [ $yn1 == "y" ]
 # then
 #   read -p "Swap partition: " swap_part
