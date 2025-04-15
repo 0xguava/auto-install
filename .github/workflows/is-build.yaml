@@ -26,7 +26,7 @@ jobs:
 
     steps:
       - name: Install required Packages in workflow 
-        run: pacman -Sy --noconfirm grub xorriso dosfstools mtools base base-devel
+        run: pacman -Sy --noconfirm base base-devel grub xorriso dosfstools mtools
       - name: Checkout Repository
         uses: actions/checkout@v4
         
@@ -54,5 +54,25 @@ jobs:
 
           # Auto login to TTY1 as root
           cat > customiso/etc/systemd/getty@tty1.service.d/override.conf << EOF
+          [Service]
+          ExecStart=
+          ExecStart=~/usr/bin/agetty --autologin root --noclear %I \$TERM
+          EOF
+
+          # Auto-run arch.sh on login
+          cat > customiso/root/.bash_profile << EOF
+          #!/bin/sh
+          /root/arch.sh
+          EOF
+          chmod +x customiso/root/.bash_profile
+
+      - name: Build ISO using xorriso
+        run: grub-mkrescue -o custom-arch.iso customiso
+
+      - name: Upload ISO as an Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: custom-arch-iso
+          path: custom-arch.iso
 
 
