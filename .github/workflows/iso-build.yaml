@@ -26,7 +26,7 @@ jobs:
 
     steps:
       - name: Install required Packages in workflow 
-        run: pacman -Sy --noconfirm base base-devel grub xorriso dosfstools mtools
+        run: pacman -Sy --noconfirm base base-devel linux grub xorriso dosfstools mtools
       - name: Checkout Repository
         uses: actions/checkout@v4
         
