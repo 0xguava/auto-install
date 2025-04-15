@@ -30,7 +30,7 @@ else
   root_part=${disk}2
 fi
 
-# echo -e "\n1.Grub\n2.Systemd-boot"
+
 # read -p "Select bootloader [1/2]: " yn2
 
 # read -p "EFI partition: " efi_part
