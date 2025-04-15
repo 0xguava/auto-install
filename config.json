@@ -1,9 +1,9 @@
 {
-	"hostname": "",
-	"adduser": "",
+	"hostname": "arch",
+	"adduser": "y",
 	"credentials": {
-		"username": "",
-		"password": "",
-		"rootpassword": ""
+		"username": "shiv",
+		"password": "vihs",
+		"rootpassword": "vihs"
 	}
 }
